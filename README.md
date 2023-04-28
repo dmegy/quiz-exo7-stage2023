@@ -1,4 +1,4 @@
-QUIZ-EXO7
+QUIZ-EXO7-STAGE2023 (repo de développement de exo7math/quiz-exo7)
 ===
 
 Ce repo contient toutes les questions de la web-application [https://dmegy.perso.math.cnrs.fr/quiz/](https://dmegy.perso.math.cnrs.fr/quiz/)
