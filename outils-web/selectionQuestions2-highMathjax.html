@@ -387,6 +387,7 @@
        
         MathJax.typesetPromise([enonce])
                     .catch(err => console.error(err));
+                    
         if (questionsSelectionnees.some(q => q.number === number) || questionsSelectionnees.some(q => q.number === parseInt(number))) {
                // Interprétation MathJax
                console.log('sdsdsdsdsdsdsd');

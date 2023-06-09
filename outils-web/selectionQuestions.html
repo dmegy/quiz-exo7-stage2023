@@ -44,7 +44,7 @@
     <div class="row">
         <div class="col s3">
             <h6>Résultats de la recherche :</h6>
-            <div class="card white z-depth-3">
+            <div class="card white">
                 <div class="card-content" style="height: calc(100vh - 146px); overflow: scroll">
                     <div id="itemsContainer" class="items"></div>
                 </div>
@@ -53,16 +53,14 @@
         <div class="col s9">
             <div class="container">
                 <h6>Questions sélectionnées :</h6>
-                <div class="card white z-depth-3">
+                <div class="card white">
                     <div class="card-content" style="height: calc(70vh - 30px); overflow: scroll">
                         <div id="questionsContainer" class="questions"></div>
                     </div>
                 </div>
                 <h6>Options :</h6>
                 <div>
-                    <button id="saveButton">Save Data</button>
-
-                    <a class="dropdown-trigger btn" href="#" data-target="dropdown1">Autres options d'export<i
+                    <a class="dropdown-trigger btn" href="#" data-target="dropdown1">Options d'export<i
                             class="material-icons right">arrow_drop_down</i></a>
                     <ul id="dropdown1" class="dropdown-content">
                         <li> <!-- OUVRIR DANS OVERLEAF -->
@@ -100,31 +98,6 @@
 </html>
 
 <script>
-    $(document).ready(function() {
-  $('#saveButton').on('click', function() {
-    // Get the data you want to save
-    var data = 'Some data to save';
-
-    // Send the data to the PHP file using AJAX
-    $.ajax({
-      type: 'POST', // or 'GET' if appropriate
-      url: 'statsBoutons.php', // Replace with the actual PHP file name
-      data: { data: data }, // Send the data as an object
-      success: function(response) {
-        // Handle the response from the PHP file
-        console.log(response);
-        // You can perform additional actions here if needed
-      },
-      error: function(xhr, status, error) {
-        // Handle any errors that occur during the AJAX request
-        console.error(error);
-      }
-    });
-  });
-});
-
-
-
     document.addEventListener('DOMContentLoaded', function () {
         var dropdownElems = document.querySelectorAll('.dropdown-trigger');
         M.Dropdown.init(dropdownElems);
