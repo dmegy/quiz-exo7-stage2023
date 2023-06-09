@@ -172,13 +172,13 @@
                         <h3> Format AMC </h3>
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirCodeAMC()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Ouvrir code AMC</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="sauvegarderCodeAMC()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Sauvegarder code AMC</span>
                         </button>
 
@@ -200,19 +200,19 @@
                         <h3> Format LaTeXMoodle </h3>
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirCodeMoodle()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Ouvrir code LaTeXMoodle</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="sauvegarderCodeLatexMoodle()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Sauvegarder code LaTeXMoodle</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirOverleafLatexMoodle()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Ouvrir dans Overleaf</span>
                         </button>
                     </div>
@@ -222,19 +222,19 @@
                         <h3> Format LaTeXMoodle </h3>
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirCodeAMC()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Ouvrir code AMC</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="sauvegarderCodeAMC()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Sauvegarder code AMC</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirOverleafAMC()">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             <span style="font-size: 15px;">Ouvrir dans Overleaf</span>
                         </button>
                     </div>
@@ -247,30 +247,30 @@
 
 
 
-            <ul id="dropdown1" class="dropdown-content">
-                <li> <!-- OUVRIR DANS OVERLEAF -->
+            <!-- <ul id="dropdown1" class="dropdown-content">
+                <li>
                     <form action="https://www.overleaf.com/docs" method="post" target="_blank" name="formulaire2">
                         <textarea id="codeLatex" rows="8" cols="60" name="snip" style="display: none;"></textarea>
                         <button class="btn btns-dropdown" type="submit" name="action" onclick="ouvrirAvecOverleaf()"
                             style="margin: 1vh;">
-                            <i class=" material-icons left">open_in_new</i>
+                            <i class="material-icons left">open_in_new</i>
                             Overleaf
                         </button>
                     </form>
                 </li>
                 <li> <button class="btn btns-dropdown" id="exportBtn" onclick="ouvrirCodeAMC()" style="margin: 1vh;"><i
-                            class=" material-icons left">open_in_new</i>Exporter en
+                            class="material-icons left">open_in_new</i>Exporter en
                         AMC</button></li>
                 <li><button class="btn btns-dropdown" id="ouvrirCodeMoodle" onclick="ouvrirCodeMoodle()"
                         style="margin: 1vh;">
-                        <i class=" material-icons left">open_in_new</i>Exporter
+                        <i class="material-icons left">open_in_new</i>Exporter
                         en Moodle</button></li>
             </ul>
 
             <button id="btn" class="btn" data-clipboard-target="#url" onclick="copierLien()" style="margin: 1vh;">
                 <i class="material-icons left">content_copy</i>
                 Copier le lien
-            </button>
+            </button> -->
 
 
 
@@ -282,11 +282,11 @@
     </div>
 
     <!-- Dialog de bienvenu -->
-    <!-- <dialog id="dialogBienvenu" class="overlay">
+    <dialog id="dialogBienvenu" class="overlay">
         <button class="close">&times;</button>
         <h2>Bienvenu à la page de création de quiz</h2>
         <p>Cette page permet de ...</p>
-    </dialog> -->
+    </dialog>
 </body>
 
 
@@ -776,7 +776,7 @@
         dummyTextArea.select();
         document.execCommand('copy');
         document.body.removeChild(dummyTextArea);
-        Materialize.toast('Copied !', 1500);
+       materialize.toast('Copied !', 1500);
     }
 
 
