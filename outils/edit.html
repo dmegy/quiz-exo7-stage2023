@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Selection questions</title>
+
+    <!-- Configuration de MathJax -->
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+
+    <!-- Librairie mathjax -->
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3.0.4/es5/tex-mml-chtml.min.js"></script>
+
+
+    <link href="edit.css" rel="stylesheet">
+
+    <!-- icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+    <script src="edit.js" defer></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <span class="badge">1</span>
+            Choix des questions ⤏ 
+            <span class="badge">2</span>
+            Choix de l'ordre ⤏ 
+            <span class="badge">Export & Envoi aux élèves</span>
+            <!--<button class="bouton" onclick="document.getElementById('dialogAide').showModal()">Mode d'emploi</button>-->
+        </div>
+
+        <div class="cell">
+            <h3>
+             Questions disponibles : <span id="numQuestions">1753</span></h3>
+            <!-- Barre de recherche -->
+            <div class="filterBar">
+                <div>Filtrer par mots-clés : &nbsp;</div>
+                <div><input  type="text" id="motRechercher" placeholder="Entrer des mots-clés"
+                onkeyup="handleKeyPress(event)"></div>
+            </div>
+        </div>
+
+        <div class="cell">
+            <h3>Questions sélectionnées pour le quiz </h3>
+            <div>(Les questions peuvent être réordonnées ou supprimées)</div>
+        </div>
+    
+        <div class="cell">
+            <div id="itemsContainer" class="conteneurQuestions"></div>
+        </div>
+
+        <div class="cell">      
+            <div class="conteneurQuestions" id="questionsContainer" class="questions"></div>
+            <div style="visibility:hidden">
+                \(
+                    \def\C{\mathbb{C}}
+                    \def\R{\mathbb{R}}
+                    \def\Q{\mathbb{Q}}
+                    \def\N{\mathbb{N}}
+                    \def\U{\mathbb{U}}
+                    \def\tr{\mathrm{Tr}}
+                    \def\cvg#1{\xrightarrow[#1]{}}
+                \)
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
