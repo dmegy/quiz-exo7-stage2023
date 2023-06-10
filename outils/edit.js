@@ -274,18 +274,7 @@
         console.log("nums au prechargement 2 : " + numsQuestionsSelectionnees);
     }
 
-    /**
-     * Fonction qui copie le lien url dans le presse-papier
-     */
-    function copierLien() {
-        var dummyTextArea = document.createElement('textarea');
-        dummyTextArea.value = window.location.href;
-        document.body.appendChild(dummyTextArea);
-        dummyTextArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(dummyTextArea);
-       materialize.toast('Copied !', 1500);
-    }
+
 
 
     /* Début du programme */
@@ -314,3 +303,5 @@
     var dataQuestions = [];
     var texteQuestions = [];
     fetchData();
+
+    const exporter = ()=>{alert("fonctionnalité à coder : on appelle la page export.html?liste=blabla");}
