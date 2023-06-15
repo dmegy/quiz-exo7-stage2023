@@ -6,26 +6,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Export de questionnaire</title>
 
-
-
     <link href="export.css" rel="stylesheet">
 
     <!-- icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- QR Code  -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
 
-    <!-- Pour le clipboard -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
     <script src="export.js" defer></script>
-
 </head>
+
 <body>
     <h1>Export du questionnaire</h1>
-    <p>
-        Cette page prend une variable
-        <pre><code>?liste=10+465+76+11</code></pre>
-        Elle affiche toutes les options d'export, et de liens/qrcode pour partager aux élèves etc.
-        On aurait pu mettre ça dans l'autre page dans un dialog mais on va commencer par faire ça sur une page séparée.
-    </p>
+    <br>
+    <br>
+    <br>
+    <!-- Colonne AMC -->
+    <div class="conteneurBoutons">
+        <div class="colonneBoutons">
+            <h3> Format AMC </h3>
+            <button class="boutonExports" id="exportBtn" onclick="ouvrirCodeAMC()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Ouvrir code AMC</span>
+            </button>
+
+            <button class="boutonExports" id="exportBtn" onclick="sauvegarderCodeAMC()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Sauvegarder code AMC</span>
+            </button>
+
+            <!-- Ouvrir dans Overleaf -->
+            <form action="https://www.overleaf.com/docs" method="post" class="boutonExports" target="_blank" name="formulaire2">
+                <textarea id="codeLatex" rows="8" cols="60" name="snip" style="display: none;"></textarea>
+                <button class="boutonExports" type="submit" name="action" onclick="ouvrirOverleafAMC()"
+                    style="margin: 1vh;">
+                    <i class="material-icons left">open_in_new</i>
+                    <span class="txtBouton">Overleaf</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- Colonne LaTeXMoodle -->
+        <div class="colonneBoutons">
+            <h3> Format LaTeXMoodle </h3>
+            <button class="boutonExports" id="exportBtn" onclick="ouvrirCodeMoodle()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Ouvrir code LaTeXMoodle</span>
+            </button>
+
+            <button class="boutonExports" id="exportBtn" onclick="sauvegarderCodeLatexMoodle()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Sauvegarder code LaTeXMoodle</span>
+            </button>
+
+            <!-- Ouvrir dans Overleaf -->
+            <form action="https://www.overleaf.com/docs" method="post" class="boutonExports" target="_blank" name="formulaire2">
+                <textarea id="codeLatex" rows="8" cols="60" name="snip" style="display: none;"></textarea>
+                <button class="boutonExports" type="submit" name="action" onclick="ouvrirOverleafMoodle()"
+                    style="margin: 1vh;">
+                    <i class="material-icons left">open_in_new</i>
+                    <span class="txtBouton">Overleaf</span>
+                </button>
+            </form>
+        </div>
+
+        <!-- XML -->
+        <div class="colonneBoutons">
+            <h3> XML (A FAIRE) </h3>
+            <button class="boutonExports" id="exportBtn" onclick="ouvrirCodeXML()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Ouvrir code XML</span>
+            </button>
+
+            <button class="boutonExports" id="exportBtn" onclick="sauvegarderCodeXML()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Sauvegarder code XML</span>
+            </button>
+
+            <button class="boutonExports" id="exportBtn" onclick="ouvrirOverleafXML()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Ouvrir dans Overleaf</span>
+            </button>
+        </div>
+
+        <!-- Autres -->
+        <div class="colonneBoutons">
+            <h3> Autres </h3>
+            <button class="boutonExports" id="exportBtn" onclick="partagerMail()">
+                <i class="material-icons left">mail</i>
+                <span class="txtBouton">Partager le lien par mail</span>
+            </button>
+            
+            <button class="boutonExports" id="exportBtn" onclick="copierLien()">
+                <i class="material-icons left">content_copy</i>
+                <span class="txtBouton">Copier le lien</span>
+            </button>
+
+            <button class="boutonExports" id="exportBtn" onclick="ouvrirQRCode()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">QR Code</span>
+            </button>
+
+            <div id="qrcode"></div>
+
+        </div>
+
+    </div>
 </body>
+
 </html>

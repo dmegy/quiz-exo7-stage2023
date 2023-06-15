@@ -1,0 +1,23 @@
+.conteneurBoutons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.colonneBoutons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.boutonExports{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vh;
+    width: 100%;
+}
+
+.txtBouton{
+    font-size: 15px;
+    margin-left : 2%;
+}
