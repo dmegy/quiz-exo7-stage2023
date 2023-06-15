@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats de l'appli</title>
+</head>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<body>
+    <h1>Stats</h1>
+    <input type="text" name="quizID" placeholder="ID du quiz">
+    <input type="submit" value="Envoyer" onclick="fetchStats()">
+    <br>
+    <br>
+    <table id="statsTable">
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Date</th>
+                <th>Quiz ID</th>
+                <th>Questions du quiz</th>
+                <th>User ID</th>
+                <th>User name</th>
+                <th>Temps passé</th>
+                <th>Réponses données</th>
+                <th>Note obtenu</th>
+                <th>Pénalité du quiz</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function fetchStats() {
+
+            let quizID = document.querySelector('input[name="quizID"]').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open(
+                'POST',
+                'https://twisting-sign.000webhostapp.com/quiz_stats.php',
+                true
+            );
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var responseData = JSON.parse(xhr.responseText);
+                        console.log('Réponse du serveur :', responseData);
+                        displayStats(responseData);
+                    } else {
+                        console.error(
+                            'Erreur lors de la requête :',
+                            xhr.status,
+                            xhr.statusText
+                        );
+                        // Gestion des erreurs
+                    }
+                }
+            };
+
+            var data = 'quizID=' + encodeURIComponent(quizID);
+            xhr.send(data);
+        }
+
+        function displayStats(stats) {
+            var tableBody = document.querySelector('#statsTable tbody');
+
+            // Réinitialiser le contenu de la table
+            tableBody.innerHTML = '';
+
+            // Parcourir les statistiques et créer les lignes du tableau
+            for (var i = 0; i < stats.length; i++) {
+                var stat = stats[i];
+
+                var row = document.createElement('tr');
+
+                var indexCell = document.createElement('td');
+                indexCell.textContent = i;
+                row.appendChild(indexCell);
+
+                var dateCell = document.createElement('td');
+                dateCell.textContent = stat.date;
+                row.appendChild(dateCell);
+
+                var quizIDCell = document.createElement('td');
+                quizIDCell.textContent = stat.quizID;
+                row.appendChild(quizIDCell);
+
+                var quizContentCell = document.createElement('td');
+                quizContentCell.textContent = stat.quizContent;
+                row.appendChild(quizContentCell);
+
+                var userIDCell = document.createElement('td');
+                userIDCell.textContent = stat.userID;
+                row.appendChild(userIDCell);
+
+                var userNameCell = document.createElement('td');
+                userNameCell.textContent = stat.userName;
+                row.appendChild(userNameCell);
+
+                var timeSpentCell = document.createElement('td');
+                timeSpentCell.textContent = stat.elapsedTime;
+                row.appendChild(timeSpentCell);
+
+                var resultsCell = document.createElement('td');
+                resultsCell.textContent = stat.results;
+                row.appendChild(resultsCell);
+
+                var noteCell = document.createElement('td');
+                noteCell.textContent = stat.note;
+                row.appendChild(noteCell);
+
+                var penalteCell = document.createElement('td');
+                penalteCell.textContent = stat.penalite;
+                row.appendChild(penalteCell);
+
+
+
+                tableBody.appendChild(row);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
