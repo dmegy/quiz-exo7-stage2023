@@ -161,7 +161,6 @@ async function sauvegarderCodeLatexMoodle() {
  */
 async function ouvrirOverleafAMC() {
     try {
-        console.log('OVERLEAF AMC');
         // Récupérer le contenu du fichier texte
         const fichierPreambule = await fetch(
             "https://raw.githubusercontent.com/dmegy/exercices-exo7-stage2023/main/exercices/_preambule.txt"
@@ -189,7 +188,7 @@ async function ouvrirOverleafAMC() {
  */
 async function ouvrirOverleafMoodle() {
     try {
-        console.log('OVERLEAF MOODLE');
+
         // Récupérer le contenu du fichier texte
         const fichierPreambule = await fetch(
             "https://raw.githubusercontent.com/dmegy/exercices-exo7-stage2023/main/exercices/_preambule.txt"
@@ -199,7 +198,6 @@ async function ouvrirOverleafMoodle() {
         // Concaténer le contenu du fichier avec le code Latex AMC
         let concatenatedText = preambule + (await getCodeMoodle());
         concatenatedText += "\n" + "\\end{document}";
-        // console.log(concatenatedText);
 
         // Mettre le contenu dans le textarea du formulaire
         const textarea = document.querySelector('textarea[name="snip"]');
@@ -291,8 +289,3 @@ var numsQuestionsSelectionnees = getNumsQuestions();
 
 var petitQRCode = generateQRCode(0);
 document.getElementById('qrcode').innerHTML = petitQRCode.createImgTag();
-
-for (i=0; i<5000000; i++){
-    const u = creerID();
-    console.log(u.length);
-}
