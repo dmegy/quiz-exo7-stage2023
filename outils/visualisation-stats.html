@@ -59,7 +59,7 @@
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ quizID: quizID }),
+                data: JSON.stringify({ quizID: quizID }),
             })
                 .then(function (response) {
                     if (response.ok) {
