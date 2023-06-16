@@ -31,19 +31,18 @@
     <input type="submit" value="Envoyer" onclick="fetchStats()">
     <br>
     <br>
+    <div class="infos" style="display: none;">
+        Ce quiz contient les questions : {}
+    </div>
+    <br>
     <table id="statsTable">
         <thead>
             <tr>
-                <th>Index</th>
                 <th>Date</th>
-                <th>Quiz ID</th>
-                <th>Questions du quiz</th>
-                <th>User ID</th>
                 <th>User name</th>
+                <th>Note obtenu</th>
                 <th>Temps passé</th>
                 <th>Réponses données</th>
-                <th>Note obtenu</th>
-                <th>Pénalité du quiz</th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +50,10 @@
     </table>
 
     <script>
+
+        let questions = [];
+        let penalite = 0;
+
         function fetchStats() {
             let quizID = document.querySelector('input[name="quizID"]').value;
 
@@ -61,7 +64,6 @@
                 true
             );
 
-
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
             xhr.onreadystatechange = function () {
@@ -70,6 +72,11 @@
                         var responseData = JSON.parse(xhr.responseText);
                         console.log('Réponse du serveur :', responseData);
                         displayStats(responseData);
+                        responseData = responseData;
+                        questions = responseData[0].quizContent;
+                        penalite = responseData[0].penalite;
+                        document.querySelector('.infos').style.display = 'block';
+                        document.querySelector('.infos').textContent = "Ce quiz contient les questions : " + questions + " et une pénalité de " + penalite + " points";
                     } else {
                         console.error(
                             'Erreur lors de la requête :',
@@ -97,29 +104,17 @@
 
                 var row = document.createElement('tr');
 
-                var indexCell = document.createElement('td');
-                indexCell.textContent = i;
-                row.appendChild(indexCell);
-
                 var dateCell = document.createElement('td');
                 dateCell.textContent = stat.date;
                 row.appendChild(dateCell);
 
-                var quizIDCell = document.createElement('td');
-                quizIDCell.textContent = stat.quizID;
-                row.appendChild(quizIDCell);
-
-                var quizContentCell = document.createElement('td');
-                quizContentCell.textContent = stat.quizContent;
-                row.appendChild(quizContentCell);
-
-                var userIDCell = document.createElement('td');
-                userIDCell.textContent = stat.userID;
-                row.appendChild(userIDCell);
-
                 var userNameCell = document.createElement('td');
                 userNameCell.textContent = stat.userName;
                 row.appendChild(userNameCell);
+
+                var noteCell = document.createElement('td');
+                noteCell.textContent = stat.note;
+                row.appendChild(noteCell);
 
                 var timeSpentCell = document.createElement('td');
                 timeSpentCell.textContent = stat.elapsedTime;
@@ -129,19 +124,10 @@
                 resultsCell.textContent = stat.results;
                 row.appendChild(resultsCell);
 
-                var noteCell = document.createElement('td');
-                noteCell.textContent = stat.note;
-                row.appendChild(noteCell);
-
-                var penalteCell = document.createElement('td');
-                penalteCell.textContent = stat.penalite;
-                row.appendChild(penalteCell);
-
-
-
                 tableBody.appendChild(row);
             }
         }
+
     </script>
 
 </body>
