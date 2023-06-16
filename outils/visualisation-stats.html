@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stats de l'appli</title>
+</head>
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th,
+    td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+</style>
+
+<body>
+    <h1>Stats</h1>
+    <input type="text" name="quizID" placeholder="ID du quiz">
+    <input type="submit" value="Envoyer" onclick="fetchStats()">
+    <br>
+    <br>
+    <div class="infos" style="display: none;">
+        Ce quiz contient les questions : {}
+    </div>
+    <br>
+    <table id="statsTable">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>User name</th>
+                <th>Note obtenu</th>
+                <th>Temps passé</th>
+                <th>Réponses données</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+
+        let questions = [];
+        let penalite = 0;
+
+        function fetchStats() {
+            let quizID = document.querySelector('input[name="quizID"]').value;
+
+            var xhr = new XMLHttpRequest();
+            xhr.open(
+                'POST',
+                'https://damienmegy.xyz/php/quizapp-exo7/quiz_stats.php',
+                true
+            );
+
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === XMLHttpRequest.DONE) {
+                    if (xhr.status === 200) {
+                        var responseData = JSON.parse(xhr.responseText);
+                        console.log('Réponse du serveur :', responseData);
+                        displayStats(responseData);
+                        responseData = responseData;
+                        questions = responseData[0].quizContent;
+                        penalite = responseData[0].penalite;
+                        document.querySelector('.infos').style.display = 'block';
+                        document.querySelector('.infos').textContent = "Ce quiz contient les questions : " + questions + " et une pénalité de " + penalite + " points";
+                    } else {
+                        console.error(
+                            'Erreur lors de la requête :',
+                            xhr.status,
+                            xhr.statusText
+                        );
+                        // Gestion des erreurs
+                    }
+                }
+            };
+
+            var data = 'quizID=' + encodeURIComponent(quizID);
+            xhr.send(data);
+        }
+
+        function displayStats(stats) {
+            var tableBody = document.querySelector('#statsTable tbody');
+
+            // Réinitialiser le contenu de la table
+            tableBody.innerHTML = '';
+
+            // Parcourir les statistiques et créer les lignes du tableau
+            for (var i = 0; i < stats.length; i++) {
+                var stat = stats[i];
+
+                var row = document.createElement('tr');
+
+                var dateCell = document.createElement('td');
+                dateCell.textContent = stat.date;
+                row.appendChild(dateCell);
+
+                var userNameCell = document.createElement('td');
+                userNameCell.textContent = stat.userName;
+                row.appendChild(userNameCell);
+
+                var noteCell = document.createElement('td');
+                noteCell.textContent = stat.note;
+                row.appendChild(noteCell);
+
+                var timeSpentCell = document.createElement('td');
+                timeSpentCell.textContent = stat.elapsedTime;
+                row.appendChild(timeSpentCell);
+
+                var resultsCell = document.createElement('td');
+                resultsCell.textContent = stat.results;
+                row.appendChild(resultsCell);
+
+                tableBody.appendChild(row);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>
