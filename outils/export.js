@@ -224,26 +224,19 @@ function partagerMail() {
 }
 
 /**
- * Génère un objet QR Code.
- * @param {integer} size - Allant entre 1 et 50. Ou 0 qui est en général la meilleure solution parce qu'elle génère
- *                         une taille automatique basée sur la taille des données.
- * @returns {object} - L'objet QR
- */
-function generateQRCode(size) {
-    var qr = qrcode(size, 'L'); // "L" = Low error correction level
-    qr.addData(window.location.href); // URL vers lequel le QR Code redirige
-    qr.make();
-    return qr;
-}
-
-/**
- * Crée un nouveau QR Code et l'affiche dans un nouvel onglet
+ * Ouvre le QR Code du quiz dans un nouvel onglet
  */
 function ouvrirQRCode() {
-    var QRCode = generateQRCode(30);
-    var newTab = window.open('', '_blank');
-    newTab.document.write('<html><body><div style="display: flex; justify-content: center; align-items: center; height: 75vh;">'
-        + QRCode.createImgTag() + '</div></body></html');
+    var urlQuiz = makeURLQuiz();
+    var qr = new QRCode(document.createElement("div"), {
+        text: urlQuiz,
+        width: 128,
+        height: 128
+    });
+
+    var qrDataUrl = qr._el.firstChild.toDataURL();
+    var newTab = window.open("", "_blank");
+    newTab.document.write('<html><body><img src="' + qrDataUrl + '"></body></html>');
     newTab.document.close();
 }
 
@@ -273,19 +266,64 @@ function creerID() {
 }
 
 // Version différente pour la creation d'ID
-// function creerID() {
-//     let result = '';
+/*function creerID() {
+    let result = '';
 
-//     for (let i = 0; i < 15; i++) {
-//         const randomCharCode = Math.floor(Math.random() * 62);
-//         const char = String.fromCharCode(randomCharCode + (randomCharCode < 26 ? 97 : randomCharCode < 52 ? 39 : -4));
-//         result += char;
-//     }
+    for (let i = 0; i < 15; i++) {
+        const randomCharCode = Math.floor(Math.random() * 62);
+        const char = String.fromCharCode(randomCharCode + (randomCharCode < 26 ? 97 : randomCharCode < 52 ? 39 : -4));
+        result += char;
+    }
 
-//     return result;
-// }
+    return result;
+}*/
+
+
+// Radio button "Non" sélectionné par défaut. Fait côté javascript pour esquiver le cache du navigateur
+// (Si c'était fait côté html, il faudrait hard refresh pour que le "checked" prenne effet)
+window.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('random-non').checked = true;
+});
 
 var numsQuestionsSelectionnees = getNumsQuestions();
 
-var petitQRCode = generateQRCode(0);
-document.getElementById('qrcode').innerHTML = petitQRCode.createImgTag();
+
+/**
+ * Vérifie la validité de la pénalité rentrée dans l'input
+ * @param {string} input - Ce qui est entré dans l'input 
+ * @returns {boolean} - Vrai si la pénalité est valide (entre 0 et 1), Faux sinon
+ */
+function isValidPenalite(input) {
+    const number = parseFloat(input);
+    return !isNaN(number) && number >= 0 && number <= 1;
+}
+
+/**
+ * Construit l'url du Quiz avec les paramètres
+ * @returns {string} - L'url
+ */
+function makeURLQuiz() {
+    var penalite = document.getElementById('input-penalite').value;
+    if (!isValidPenalite(penalite)) {
+        console.log('Penalite Invalide');
+        return '';
+    }
+    var nickname = document.getElementById('input-nickname').value;
+    var randomiser = document.getElementById('random-oui').checked;
+    var identifiant = creerID();
+    var urlQuiz = 'https://phil1010.github.io/quizapp-exo7/?c=' + numsQuestionsSelectionnees.join('+') +
+        '&r=' + Number(randomiser) + '&p=' + penalite + '&n=' + nickname + '&i=' + identifiant;
+    return urlQuiz;
+}
+
+/**
+ * Ouvrir le quiz dans un nouvel onglet
+ */
+function ouvrirQuiz() {
+    const urlQuiz = makeURLQuiz();
+    var newTab = window.open(urlQuiz, '_blank');
+    if (!urlQuiz) {
+        newTab.document.write('<html><body><p> Pénalité invalide. Il faut entrer une pénalité entre 0 et 1 </p></body></html');
+    }
+    newTab.document.close();
+}

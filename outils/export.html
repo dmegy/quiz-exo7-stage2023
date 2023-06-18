@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
     <!-- QR Code  -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
 
 
     <script src="export.js" defer></script>
@@ -72,29 +72,25 @@
             </form>
         </div>
 
-        <!-- XML -->
-        <div class="colonneBoutons">
-            <h3> XML (A FAIRE) </h3>
-            <button class="boutonExports" id="exportBtn" onclick="ouvrirCodeXML()">
-                <i class="material-icons left">open_in_new</i>
-                <span class="txtBouton">Ouvrir code XML</span>
-            </button>
+        <!-- Quiz -->
+        <div class="colonneBoutons" style="flex:0.7; margin-left: 3%; margin-right: 3%">
 
-            <button class="boutonExports" id="exportBtn" onclick="sauvegarderCodeXML()">
-                <i class="material-icons left">open_in_new</i>
-                <span class="txtBouton">Sauvegarder code XML</span>
-            </button>
+            <h3> Application Quiz </h3>
 
-            <button class="boutonExports" id="exportBtn" onclick="ouvrirOverleafXML()">
-                <i class="material-icons left">open_in_new</i>
-                <span class="txtBouton">Ouvrir dans Overleaf</span>
-            </button>
-        </div>
+            <input class="input" type="text" id="input-nickname" placeholder="identifiant">
 
-        <!-- Autres -->
-        <div class="colonneBoutons">
-            <h3> Autres </h3>
-            <button class="boutonExports" id="exportBtn" onclick="partagerMail()">
+ 
+            <div>
+                Randomiser l'ordre des questions : 
+                <input type="radio" name="randomiser" id="random-oui" value="oui"> Oui
+                <input type="radio" name="randomiser" id="random-non" value="non"> Non
+                
+            </div>
+            
+            <input class="input" type="text" id="input-penalite" placeholder="penalité allant de 0 à 1">
+
+
+            <!-- <button class="boutonExports" id="exportBtn" onclick="partagerMail()">
                 <i class="material-icons left">mail</i>
                 <span class="txtBouton">Partager le lien par mail</span>
             </button>
@@ -102,15 +98,17 @@
             <button class="boutonExports" id="exportBtn" onclick="copierLien()">
                 <i class="material-icons left">content_copy</i>
                 <span class="txtBouton">Copier le lien</span>
-            </button>
+            </button> -->
 
             <button class="boutonExports" id="exportBtn" onclick="ouvrirQRCode()">
                 <i class="material-icons left">open_in_new</i>
                 <span class="txtBouton">QR Code</span>
             </button>
 
-            <div id="qrcode"></div>
-
+            <button class="boutonExports" id="openQuiz" onclick="ouvrirQuiz()">
+                <i class="material-icons left">open_in_new</i>
+                <span class="txtBouton">Ouvrir le Quiz</span>
+            </button>
         </div>
 
     </div>
