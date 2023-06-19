@@ -1,0 +1,77 @@
+:root{
+    --teinte: 250;
+    --coul-header : oklch(35% 0.1 var(--teinte));
+    --coul-soustitre : oklch(50% 0.1 var(--teinte));
+}
+
+
+body {
+    padding:0;
+    margin:0;
+    font-family:Arial;
+}
+
+.container{
+    height:100dvh;
+    overflow:hidden;
+    display :grid;
+    grid-template-columns: 50% 50%;
+}
+
+h3{
+    font-family: Futura;
+    font-size:1.2rem;
+    padding:.5rem 0 ;
+    margin:0;
+}
+
+a{
+    cursor:pointer;
+}
+
+.cell{
+    padding:.5rem;
+}
+
+.header{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height:min-content;
+    color: white;
+    font-family:Futura,Arial;
+    font-size:1.5rem;
+    background-color: var(--coul-header);
+    padding : .6rem;
+    display:flex;
+    align-items:center;
+}
+
+
+
+.badge{
+    font-family: Futura,Arial;
+    display: inline-block;
+    padding:0 .6rem;
+    margin:.5rem;
+    border:0;
+    border-radius:2rem;
+    background-color:white;
+    color:var(--coul-header);
+}
+
+.bouton{
+    font-size:1rem;
+}
+
+.conteneurQuestions{
+    overflow-y:scroll;
+    overflow-x:hidden;
+    height:calc(100dvh - 12rem);
+    border : 1px black solid;
+}
+
+.filterBar{
+    padding-bottom:.4rem;
+    display:flex;
+}
+

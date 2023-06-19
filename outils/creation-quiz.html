@@ -65,7 +65,7 @@
             width: 90%;
             height: 80%;
             margin-top: 2%;
-            background-color: rgba(0, 0, 0, 1);
+            background-color: rgb(56, 52, 52);
             z-index: 9999;
             display: none;
             pointer-events: none;
@@ -164,8 +164,10 @@
             <!-- Dialog Options -->
             <dialog id="dialogOptions" style="justify-content: space-between;" class="overlay">
                 <button class="close">&times;</button>
-                <h1> BOUTONS</h1>
-
+                <h1> Options d'export </h1>
+<br>
+<br>
+<br>
                 <!-- Colonne AMC -->
                 <div class="conteneurBoutons">
                     <div class="colonneBoutons">
@@ -183,15 +185,11 @@
                         </button>
 
                         <!-- Ouvrir dans Overleaf -->
-                        <form action="https://www.overleaf.com/docs"
-                            style="display: flex; align-items: center;justify-content: center; margin: 1vh;"
-                            method="post" target="_blank">
-                            <textarea rows="8" cols="60" name="snip" style="display: none;"></textarea>
-                            <button class="waves-effect waves-light btn" type="submit" name="action">
-                                <i class="material-icons">open_in_new</i>
-                                <span class="btn-share-text">Overleaff</span>
-                            </button>
-                        </form>
+                        <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
+                        id="exportBtn" onclick="ouvrirOverleafLatexMoodle()">
+                        <i class="material-icons left">open_in_new</i>
+                        <span style="font-size: 15px;">Ouvrir dans Overleaf</span>
+                    </button>
 
                     </div>
 
@@ -217,26 +215,22 @@
                         </button>
                     </div>
 
-                    <!-- Autre -->
+                    <!-- Autres -->
                     <div class="colonneBoutons">
-                        <h3> Format LaTeXMoodle </h3>
+                        <h3> Autres </h3>
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="ouvrirCodeAMC()">
-                            <i class="material-icons left">open_in_new</i>
-                            <span style="font-size: 15px;">Ouvrir code AMC</span>
+                            <i class="material-icons left">mail</i>
+                            <span style="font-size: 15px;">Partager le lien par mail</span>
                         </button>
 
                         <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
                             id="exportBtn" onclick="sauvegarderCodeAMC()">
                             <i class="material-icons left">open_in_new</i>
-                            <span style="font-size: 15px;">Sauvegarder code AMC</span>
+                            <span style="font-size: 15px;">QR Code</span>
                         </button>
 
-                        <button style="display: flex; align-items: center; justify-content: center; margin: 1vh;"
-                            id="exportBtn" onclick="ouvrirOverleafAMC()">
-                            <i class="material-icons left">open_in_new</i>
-                            <span style="font-size: 15px;">Ouvrir dans Overleaf</span>
-                        </button>
+                       
                     </div>
                 </div>
             </dialog>
@@ -277,7 +271,7 @@
 
 
 
-            <button id="btn" onclick="copierLien()">Copier le lien</button>
+            <!-- <button id="btn" onclick="copierLien()">Copier le lien</button> -->
         </div>
     </div>
 
